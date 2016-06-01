@@ -1,5 +1,4 @@
 
-
 //Given the following code, write one line of code that will print "Hello, world!" three times.
 
 
@@ -15,7 +14,7 @@ function greet() {
 
 
 //Code here
-
+doThrice(greet);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,11 +34,10 @@ function sayHello() {
 }
 
 //Line A
-
+var sayHelloClosure = sayHello();
 //console.log(sayHelloClosure);
-
 //Line B
-
+sayHelloClosure();
 
 
 
@@ -47,10 +45,8 @@ function sayHello() {
 
 
 
+
 //You found a mysterious piece of code that calculates and prints theAnswer. What will it print and why?
-
-	//Answer
-
 
 var universe = 1;  //global variable
 
@@ -78,7 +74,6 @@ console.log(theAnswer);
 
 
 
-
 //On line A, declare a local variable called num and give it a value of 1.
 //On line B, write another function called checkNumber. Make it so the checkNumber function will console.log(num).
 //On line C, return the function definition of checkNumber.
@@ -88,19 +83,20 @@ console.log(theAnswer);
 
 function numberGenerator() {
   //Line A
-
+  var num = 1;
   //Line B 
-
+  function checkNumber() { 
+    console.log(num);
+  }
   num++;
   //Line C
-
+  return checkNumber;
 }
 
 //Line D
-
+var number = numberGenerator();
 //Line E
-
-
+number(); // 2
 
 
 
@@ -121,45 +117,54 @@ function numberGenerator() {
 //        Invoke the goodbye method and pass in your name. Check your console.
 
 
+function helloGoodbye() {
+	
+	var sayHi = "Hello, ";
+	var sayBye = "Goodbye, ";
 
+	function hello(name) {
+		console.log(sayHi + name);
+	}
 
+	function goodbye(name) {
+		console.log(sayBye + name);
+	}
 
+	return {
+		hi: hello,
+		bye: goodbye
+	}
+}
 
-//Code here
-
-
-
-
-
-
-
+var hibye = helloGoodbye();
+hibye.hi("Joe")
+hibye.bye("Joe")
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Below is a function with a private reference to the password variable.
-//Inside the return object, write a method called guessPassword that will take in a guess parameter.
+//Inside the return object, write a method that will take in a guess parameter.
 //Have that method return true if the guess is equal to password, and false if it's not.
-
-
 
 
 function secretPassword() {
   var password = 'xh38sk';
   return {
-  	//Code here
+    guessPassword: function(guess) {
+      if (guess === password) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
 
 var passwordGame = secretPassword();
 passwordGame.guessPassword('heyisthisit?'); // should return false
 passwordGame.guessPassword('xh38sk'); // should return true
-
-
-
-
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -215,3 +220,4 @@ scopeFunc();
 
 //3) What are some reasons to use closures in JavaScript?
 	//Answer
+
