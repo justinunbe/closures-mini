@@ -14,14 +14,14 @@ function greet() {
 }
 
 
-//Code here
+doThrice(greet);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//Below is a function that returns the definition of a function. 
-//On Line A, assign the invocation of sayHello to a new variable called sayHelloClosure. 
+//Below is a function that returns the definition of a function.
+//On Line A, assign the invocation of sayHello to a new variable called sayHelloClosure.
 //Uncomment the console.log and notice that it logs the function definition of say.
 //On Line B, invoke that new variable. Check your console for 'Hello again, world!'.
 //Because of the closure, we were able to 'look inside' the scope of the sayHello function.
@@ -34,11 +34,11 @@ function sayHello() {
 	return say;
 }
 
-//Line A
+var sayHelloClosure = sayHello();
 
-//console.log(sayHelloClosure);
+// console.log(sayHelloClosure);
 
-//Line B
+sayHelloClosure();
 
 
 
@@ -57,15 +57,15 @@ var universe = 1;  //global variable
 function getEverything(){
     var life = 22; //declared in function
     return life;
-}
+}//life returned so you can now use it on global.
 
 function doubleUniverse(){
-    universe = universe * 2;
+    universe = universe * 2;//universe is only 2 inside this function.
 }
 
 //double universe 4 times
-for(var life=0; life<4; life++){  
-    doubleUniverse(); 
+for(var life=0; life<4; life++){
+    doubleUniverse();
 }
 
 var everything = getEverything();
@@ -87,18 +87,21 @@ console.log(theAnswer);
 
 
 function numberGenerator() {
-  //Line A
-
-  //Line B 
+var num = 1;
+	function checkNumber(){
+		console.log(num)
+	}
 
   num++;
-  //Line C
+return checkNumber;
 
 }
 
-//Line D
+var number = numberGenerator();
 
-//Line E
+number();
+
+//2
 
 
 
@@ -108,13 +111,14 @@ function numberGenerator() {
 
 
 //Step 1: Write a function called helloGoodbye. Inside of this function, declare two local variables: sayHi and sayBye. Examples below.
-//        var sayHi = "Hello, "; 
+//        var sayHi = "Hello, ";
 //        var sayBye = "Goodbye, ";
 
 //Step 2: Below these variables, declare two functions. Both should take a name parameter. One should be called hello and one should be called goodbye.
 //		  The hello function should console.log(sayHi + name) and the goodbye function should console.log(sayBye + name)
 
-//Step 3: Following the module pattern, return an object containing these two function definitions so we can access them from outside helloGoodbye's scope.
+//Step 3: Following the module pattern, return an object containing these two function definitions so we can access
+//them from outside helloGoodbye's scope.
 
 //Step 4: Now invoke helloGoodbye and save it to a new variable.
 //        Then, invoke the hello method from that new variable and pass in your name. Check your console to make sure it worked.
@@ -125,7 +129,24 @@ function numberGenerator() {
 
 
 
-//Code here
+function helloGoodbye() {
+	var sayHi="hello, ";
+	var sayBye="Godbye, ";
+	function hello(name) {
+		console.log(sayHi + name);
+	}
+	function goodbye(name){
+		console.log(sayBye + name);
+	}
+	return {  //should I return here and should I be naming this object?
+		hello:hello,  //should it be invoked?
+		goodbye:goodbye //should the key names be the same as the function names?
+	}
+}
+
+var helloVar = helloGoodbye();   //how do I use dot notation to access greeting.functionOne from helloVar
+heeloVar.hello();
+
 
 
 
@@ -148,7 +169,12 @@ function numberGenerator() {
 function secretPassword() {
   var password = 'xh38sk';
   return {
-  	//Code here
+  	guessPassword:function(guess){
+			if(guess === password){
+				return true;
+			}
+			return false;
+		}
   }
 }
 
@@ -171,7 +197,7 @@ passwordGame.guessPassword('xh38sk'); // should return true
 //        Therefore, every time i is incremented, it updates scope. Any function trying to access i will return 5,
 //        because i is equal to 5 when the for loop exits.
 
-//Step 2: Get scopeFunc to print 1, then 2, then 3, etc. You can do this by giving each function inside of the for loop its own scope. 
+//Step 2: Get scopeFunc to print 1, then 2, then 3, etc. You can do this by giving each function inside of the for loop its own scope.
 //		  HINT: Wrap it in a function that invokes immediately. You will need to pass i in as an argument.
 
 
@@ -204,14 +230,15 @@ scopeFunc();
 //QUESTIONS - feel free to use google to research
 
 //1) In your own words, what is execution context? What is the call stack?
-	//Answer
+	//execution context is executing a module.
+	//call stack is what order everything will be executed in.
 
 
 
 //2) What is the scope chain?
-	//Answer
+	//what the function can or can not see.
 
 
 
 //3) What are some reasons to use closures in JavaScript?
-	//Answer
+	//keep var private and public.
